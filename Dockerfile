@@ -1,12 +1,11 @@
-# Use official Blackbox Exporter image
+# Use official blackbox exporter image
 FROM prom/blackbox-exporter:latest
 
-# Copy your configuration
+# Copy config
 COPY blackbox.yml /etc/blackbox_exporter/config.yml
 
-# Railway dynamic PORT
-ENV PORT=8080
-EXPOSE $PORT
+# Expose the default port (optional)
+EXPOSE 8080
 
-# Start Blackbox Exporter with correct flags
-CMD ["--web.listen-address=:${PORT}", "--config.file=/etc/blackbox_exporter/config.yml", "--web.external-url="]
+# Use shell form so environment variable is substituted
+CMD blackbox_exporter --web.listen-address=":$PORT" --config.file=/etc/blackbox_exporter/config.yml
