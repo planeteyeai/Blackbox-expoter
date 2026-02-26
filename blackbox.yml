@@ -5,5 +5,5 @@ modules:
     http:
       valid_http_versions: ["HTTP/1.1", "HTTP/2"]
       method: GET
-      fail_if_not_ssl: false
-      preferred_ip_protocol: "ip4"
+      tls_config:
+        insecure_skip_verify: true
